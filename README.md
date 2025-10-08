@@ -6,48 +6,38 @@
 <H3>Algorithm:</H3>
 
 
-// A* Search Algorithm
-1.  Initialize the open list
-2.  Initialize the closed list
-    put the starting node on the open 
-    list (you can leave its f at zero)
+Step 1: Start with the start node.
 
-3.  while the open list is not empty
-    a) find the node with the least f on 
-       the open list, call it "q"
+Step 2: Keep a list of nodes to check called open_list, initially containing only the start node.
 
-    b) pop q off the open list
-  
-    c) generate q's 8 successors and set their 
-       parents to q
-   
-    d) for each successor
-        i) if successor is the goal, stop search
-        
-        ii) else, compute both g and h for successor
-          successor.g = q.g + distance between 
-                              successor and q
-          successor.h = distance from goal to 
-          successor (This can be done using many 
-          ways, we will discuss three heuristics- 
-          Manhattan, Diagonal and Euclidean 
-          Heuristics)
-          
-          successor.f = successor.g + successor.h
+Step 3: Keep track of the cost to reach each node in a dictionary g, with the start node cost = 0.
 
-        iii) if a node with the same position as 
-            successor is in the OPEN list which has a 
-           lower f than successor, skip this successor
+Step 4: Keep a parent dictionary to remember the path, with parent of start = None.
 
-        iV) if a node with the same position as 
-            successor  is in the CLOSED list which has
-            a lower f than successor, skip this successor
-            otherwise, add  the node to the open list
-     end (for loop)
-  
-    e) push q on the closed list
-    end (while loop)
+Step 5: While the open_list is not empty:
 
+Pick the node with the smallest total cost (cost so far + estimated cost to goal).
+
+If this node is the goal, follow parent nodes backward to get the path and stop.
+
+Remove this node from the open_list.
+
+Step 6: For each neighbor of the current node:
+
+Calculate new cost = cost to current node + edge cost.
+
+If the neighbor is not in the cost dictionary or the new cost is smaller than the previous one:
+
+Update the cost for that neighbor.
+
+Set the parent of the neighbor to the current node.
+
+Add the neighbor to the open_list with total cost = new cost + heuristic value.
+
+Step 7: Repeat Steps 5 and 6 until the open_list is empty or the goal is reached.
+
+Step 8: If the goal node is found, display the path (from start to goal).
+Otherwise, print “No path found.”
 ## PROGRAM
 ```
 
